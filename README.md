@@ -129,7 +129,7 @@ _(GitHub does not support direct iframe embeds. Click the badge below to load th
   </a>
   <br/><br/>
   <a href="https://tenor.com/view/texty-hfjone-one-osc-gif-15143396637300268001">
-    <img src="https://media.tenor.com/S8I4O9X-Nn0AAAAi/texty-hfjone.gif" alt="Texty Design Phase" height="150" style="border-radius: 8px;"/>
+    <img src="https://media.tenor.com/S8I4O9X-Nn0AAAAi/texty-hfjone.gif" alt="a computer screen that says the search engine" width="498" height="29" style="border-radius: 8px;"/>
   </a>
 </div>
 
@@ -138,6 +138,10 @@ _(GitHub does not support direct iframe embeds. Click the badge below to load th
 ## 📢 Social Media Announcement Draft
 
 We have prepared a captivating, ready-to-use snippet for your LinkedIn or X (formerly Twitter) feed. Feel free to copy and share it with your network!
+
+<div align="center">
+  <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExZzdncWF6cWloODIwcGU1bXEzdzZ2MXd1YWIxYW0xcGh2aGY5YXl2YyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/WoLhFt0i6AtUFasPyC/giphy.gif" alt="Hacker typing" width="400" style="border-radius: 8px; margin: 20px 0;"/>
+</div>
 
 > Are you tired of constantly compromising your digital privacy for relevant web results? 🛑 It’s time for a definitive paradigm shift!
 >
@@ -157,23 +161,10 @@ We have prepared a captivating, ready-to-use snippet for your LinkedIn or X (for
 
 I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions. Feel free to reach out to me through any of the platforms below:
 
-<div align="center">
-  <a href="https://github.com/KenanGain">
-    <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
-  </a>
-  <a href="https://www.linkedin.com/in/kenan-gain-33048518a/">
-    <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" />
-  </a>
-  <a href="https://twitter.com/KenanGain">
-    <img src="https://img.shields.io/badge/X_Twitter-000000?style=for-the-badge&logo=x&logoColor=white" alt="X (Twitter)" />
-  </a>
-  <a href="https://www.instagram.com/knightgamer87">
-    <img src="https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white" alt="Instagram" />
-  </a>
-  <a href="https://www.youtube.com/@KnightGamer87">
-    <img src="https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="YouTube" />
-  </a>
-  <a href="https://bento.me/kenangain">
-    <img src="https://img.shields.io/badge/Bento-0A0A0A?style=for-the-badge&logo=bento&logoColor=white" alt="Bento" />
-  </a>
-</div>
+|                                                                   Kenan Gain                                                                    |                                                                                                YouTube                                                                                                |                                                                                                 Instagram                                                                                                 |                                                                                                        LinkedIn                                                                                                         |                                                                                    Facebook                                                                                     |
+| :---------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+| [![Kenan Gain](https://bentos.jkominovic.dev/api/v1/generic-card?icon=sireaddotcv&subtitle=Kenan+Gain&size=square)](https://www.kenangain.com/) | [![knightgamer87](https://bentos.jkominovic.dev/api/v1/bento-cards?url=https%3A%2F%2Fwww.youtube.com%2F%40KnightGamer87&subtitle=@knightgamer87&size=square)](https://www.youtube.com/@KnightGamer87) | [![knightgamer87](https://bentos.jkominovic.dev/api/v1/bento-cards?url=https%3A%2F%2Fwww.instagram.com%2Fknightgamer87%2F&subtitle=@knightgamer87&size=square)](https://www.instagram.com/knightgamer87/) | [![Kenan Gain](https://bentos.jkominovic.dev/api/v1/bento-cards?url=https%3A%2F%2Fwww.linkedin.com%2Fin%2Fkenan-gain-33048518a%2F&subtitle=@Kenan+Gain&size=square)](https://www.linkedin.com/in/kenan-gain-33048518a/) | [![Kenan Gain](https://bentos.jkominovic.dev/api/v1/bento-cards?url=https%3A%2F%2Ffacebook.com%2Fkenan.gain&subtitle=@Kenan+Gain&size=square)](https://facebook.com/kenan.gain) |
+
+|                                                                                            Twitch                                                                                             |                                                                           Twitter (X)                                                                           |                                                                                                              Reddit                                                                                                              |                                                                                    Discord                                                                                     |                                                                                   GitHub                                                                                    |
+| :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+| [![knightgamer2910](https://bentos.jkominovic.dev/api/v1/bento-cards?url=https%3A%2F%2Ftwitch.tv%2Fknightgamer2910&subtitle=@knightgamer2910&size=square)](https://twitch.tv/knightgamer2910) | [![KenanGain](https://bentos.jkominovic.dev/api/v1/bento-cards?url=https%3A%2F%2Fx.com%2Fgain_kenan&subtitle=@KenanGain&size=square)](https://x.com/gain_kenan) | [![Automated_Artistry](https://bentos.jkominovic.dev/api/v1/bento-cards?url=https%3A%2F%2Fwww.reddit.com%2Fuser%2FAutomated_Artistry&subtitle=r/Automated_Artistry&size=square)](https://www.reddit.com/user/Automated_Artistry) | [![Knight Gamer](https://bentos.jkominovic.dev/api/v1/bento-cards?url=https%3A%2F%2Fdiscord.gg%2FYdDyV6QqEN&subtitle=Knight+Gamer&size=square)](https://discord.gg/YdDyV6QqEN) | [![Kenan Gain](https://bentos.jkominovic.dev/api/v1/bento-cards?url=https%3A%2F%2Fgithub.com%2FKenanGain&subtitle=%2FKenan+Gain&size=square)](https://github.com/KenanGain) |
