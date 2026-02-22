@@ -1,0 +1,627 @@
+version: "3.9"
+
+# ═══════════════════════════════════════════════════════════════
+#  ULTIMATE CUSTOM SEARCH ENGINE STACK
+#  21+ engines, crawlers, extractors — all self-hosted, zero SaaS
+#  Unified API Gateway at http://localhost:8000
+#
+#  Usage:
+#    docker compose up -d                           # Core engines + Fess + Vespa + Tika
+#    docker compose --profile crawlers up -d        # + Nutch & Heritrix crawlers
+#    docker compose --profile storm up -d           # + StormCrawler infrastructure
+#    docker compose --profile full up -d            # Everything
+# ═══════════════════════════════════════════════════════════════
+
+services:
+
+  # ─────────────────────────────────────────
+  # UNIFIED API GATEWAY  →  http://localhost:8000
+  # Aggregates ALL engines into one REST API
+  # ─────────────────────────────────────────
+  search-api:
+    build: ./api
+    container_name: search-api
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    depends_on:
+      - searxng
+      - whoogle
+      - meilisearch
+      - typesense
+      - quickwit
+      - sonic
+      - opensearch
+      - manticore
+      - solr
+      - zincsearch
+      - qdrant
+      - redisearch
+      - fess
+      - vespa
+      - tika
+    networks:
+      - searchnet
+
+  # ═══════════════════════════════════════════
+  #  CATEGORY 1 — WEB META-SEARCH ENGINES
+  # ═══════════════════════════════════════════
+
+  # ─────────────────────────────────────────
+  # 1. WHOOGLE           →  http://localhost:5000
+  #    Google results without ads/tracking
+  # ─────────────────────────────────────────
+  whoogle:
+    image: benbusby/whoogle-search:latest
+    container_name: whoogle
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    volumes:
+      - whoogle-data:/config
+    environment:
+      - WHOOGLE_RESULTS_PER_PAGE=25
+    networks:
+      - searchnet
+
+  # ─────────────────────────────────────────
+  # 2. SEARXNG           →  http://localhost:8080
+  #    Meta-search across 70+ engines
+  # ─────────────────────────────────────────
+  searxng:
+    image: searxng/searxng:latest
+    container_name: searxng
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./config/searxng:/etc/searxng
+    networks:
+      - searchnet
+
+  # ═══════════════════════════════════════════
+  #  CATEGORY 2 — FULL-TEXT SEARCH ENGINES
+  # ═══════════════════════════════════════════
+
+  # ─────────────────────────────────────────
+  # 3. MEILISEARCH       →  http://localhost:7700
+  #    Typo-tolerant, instant search
+  # ─────────────────────────────────────────
+  meilisearch:
+    image: getmeili/meilisearch:latest
+    container_name: meilisearch
+    restart: unless-stopped
+    ports:
+      - "7700:7700"
+    volumes:
+      - meili-data:/meili_data
+    environment:
+      MEILI_MASTER_KEY: ${MEILI_MASTER_KEY:-master-key-change-me-12345}
+      MEILI_DB_PATH: /meili_data
+      MEILI_ENV: development
+    networks:
+      - searchnet
+
+  # ─────────────────────────────────────────
+  # 4. TYPESENSE         →  http://localhost:8108
+  #    Typo-tolerant, tunable ranking
+  # ─────────────────────────────────────────
+  typesense:
+    image: typesense/typesense:27.1
+    container_name: typesense
+    restart: unless-stopped
+    ports:
+      - "8108:8108"
+    volumes:
+      - typesense-data:/data
+    command:
+      - --data-dir
+      - /data
+      - --api-key
+      - ${TYPESENSE_API_KEY:-typesense-key-change-me}
+      - --enable-cors
+    networks:
+      - searchnet
+
+  # ─────────────────────────────────────────
+  # 5. QUICKWIT          →  http://localhost:7280
+  #    Sub-second search on cloud storage
+  # ─────────────────────────────────────────
+  quickwit:
+    image: quickwit/quickwit:latest
+    container_name: quickwit
+    restart: unless-stopped
+    ports:
+      - "7280:7280"
+    volumes:
+      - quickwit-data:/quickwit/qwdata
+    command:
+      - run
+    networks:
+      - searchnet
+
+  # ─────────────────────────────────────────
+  # 6. SONIC             →  TCP localhost:1491
+  #    Sub-millisecond search index
+  # ─────────────────────────────────────────
+  sonic:
+    image: valeriansaliou/sonic:latest
+    container_name: sonic
+    restart: unless-stopped
+    ports:
+      - "1491:1491"
+    volumes:
+      - sonic-data:/var/lib/sonic/store
+      - ./config/sonic.cfg:/etc/sonic.cfg:ro
+    networks:
+      - searchnet
+
+  # ─────────────────────────────────────────
+  # 7. OPENSEARCH        →  http://localhost:9200
+  #    Elasticsearch-compatible, full-featured
+  # ─────────────────────────────────────────
+  opensearch:
+    image: opensearchproject/opensearch:2.11.1
+    container_name: opensearch
+    restart: unless-stopped
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    volumes:
+      - opensearch-data:/usr/share/opensearch/data
+    environment:
+      - discovery.type=single-node
+      - OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m
+      - DISABLE_SECURITY_PLUGIN=true
+    networks:
+      - searchnet
+
+  # ─────────────────────────────────────────
+  # 8. OPENSEARCH DASHBOARDS →  http://localhost:5601
+  # ─────────────────────────────────────────
+  opensearch-dashboards:
+    image: opensearchproject/opensearch-dashboards:2.11.1
+    container_name: opensearch-dashboards
+    restart: unless-stopped
+    ports:
+      - "5601:5601"
+    depends_on:
+      - opensearch
+    environment:
+      - OPENSEARCH_HOSTS=http://opensearch:9200
+      - DISABLE_SECURITY_DASHBOARDS_PLUGIN=true
+    networks:
+      - searchnet
+
+  # ─────────────────────────────────────────
+  # 9. MANTICORE         →  http://localhost:9308
+  #    MySQL-compatible full-text search
+  # ─────────────────────────────────────────
+  manticore:
+    image: manticoresearch/manticore:latest
+    container_name: manticore
+    restart: unless-stopped
+    ports:
+      - "9308:9308"
+      - "9306:9306"
+    volumes:
+      - manticore-data:/var/lib/manticore
+    networks:
+      - searchnet
+
+  # ─────────────────────────────────────────
+  # 10. SOLR             →  http://localhost:8983
+  #     Enterprise-grade full-text search (also used by Nutch)
+  # ─────────────────────────────────────────
+  solr:
+    image: solr:9
+    container_name: solr
+    restart: unless-stopped
+    ports:
+      - "8983:8983"
+    volumes:
+      - solr-data:/var/solr
+    command:
+      - solr-precreate
+      - gettingstarted
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+    networks:
+      - searchnet
+
+  # ─────────────────────────────────────────
+  # 11. ZINCSEARCH       →  http://localhost:4080
+  #     Lightweight Elasticsearch alternative
+  # ─────────────────────────────────────────
+  zincsearch:
+    image: public.ecr.aws/zinclabs/zincsearch:latest
+    container_name: zincsearch
+    restart: unless-stopped
+    ports:
+      - "4080:4080"
+    volumes:
+      - zinc-data:/data
+    environment:
+      ZINC_DATA_PATH: /data
+      ZINC_FIRST_ADMIN_USER: ${ZINC_USER:-admin}
+      ZINC_FIRST_ADMIN_PASSWORD: ${ZINC_PASSWORD:-ComplexPass123!}
+    networks:
+      - searchnet
+
+  # ─────────────────────────────────────────
+  # 12. VESPA            →  http://localhost:8082
+  #     Advanced hybrid search: text + vector + structured
+  #     Config API at port 19071
+  # ─────────────────────────────────────────
+  vespa:
+    image: vespaengine/vespa:8
+    container_name: vespa
+    restart: unless-stopped
+    ports:
+      - "8082:8080"
+      - "19071:19071"
+    volumes:
+      - vespa-data:/opt/vespa/var
+    deploy:
+      resources:
+        limits:
+          memory: 4G
+    networks:
+      - searchnet
+
+  # ═══════════════════════════════════════════
+  #  CATEGORY 3 — VECTOR / SEMANTIC SEARCH
+  # ═══════════════════════════════════════════
+
+  # ─────────────────────────────────────────
+  # 13. QDRANT           →  http://localhost:6333
+  #     High-perf vector similarity search
+  # ─────────────────────────────────────────
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: qdrant
+    restart: unless-stopped
+    ports:
+      - "6333:6333"
+      - "6334:6334"
+    volumes:
+      - qdrant-data:/qdrant/storage
+    networks:
+      - searchnet
+
+  # ─────────────────────────────────────────
+  # 14. WEAVIATE         →  http://localhost:8085
+  #     AI-native vector DB with modules
+  # ─────────────────────────────────────────
+  weaviate:
+    image: cr.weaviate.io/semitechnologies/weaviate:1.28.4
+    container_name: weaviate
+    restart: unless-stopped
+    ports:
+      - "8085:8080"
+      - "50051:50051"
+    volumes:
+      - weaviate-data:/var/lib/weaviate
+    environment:
+      QUERY_DEFAULTS_LIMIT: 25
+      AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED: "true"
+      PERSISTENCE_DATA_PATH: /var/lib/weaviate
+      DEFAULT_VECTORIZER_MODULE: none
+      CLUSTER_HOSTNAME: node1
+    networks:
+      - searchnet
+
+  # ═══════════════════════════════════════════
+  #  CATEGORY 4 — SPECIALIZED SEARCH
+  # ═══════════════════════════════════════════
+
+  # ─────────────────────────────────────────
+  # 15. REDISEARCH       →  http://localhost:6379
+  #     In-memory full-text + vector search
+  # ─────────────────────────────────────────
+  redisearch:
+    image: redis/redis-stack:latest
+    container_name: redisearch
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+      - "8001:8001"
+    volumes:
+      - redis-data:/data
+    networks:
+      - searchnet
+
+  # ─────────────────────────────────────────
+  # 16. YACY             →  http://localhost:8090
+  #     Decentralized peer-to-peer web search
+  # ─────────────────────────────────────────
+  yacy:
+    image: yacy/yacy_search_server:latest
+    container_name: yacy
+    restart: unless-stopped
+    ports:
+      - "8090:8090"
+      - "8443:8443"
+    volumes:
+      - yacy-data:/opt/yacy_search_server/DATA
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+    networks:
+      - searchnet
+
+  # ═══════════════════════════════════════════
+  #  CATEGORY 5 — GOOGLE CSE ALTERNATIVES
+  #  (All-in-one: crawler + indexer + search portal)
+  # ═══════════════════════════════════════════
+
+  # ─────────────────────────────────────────
+  # 17. FESS (OpenSearch backend — internal)
+  # ─────────────────────────────────────────
+  fess-opensearch:
+    image: ghcr.io/codelibs/fess-opensearch:2.11.0
+    container_name: fess-opensearch
+    restart: unless-stopped
+    environment:
+      - node.name=fess-opensearch
+      - discovery.type=single-node
+      - OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m
+      - DISABLE_SECURITY_PLUGIN=true
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    volumes:
+      - fess-opensearch-data:/usr/share/opensearch/data
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+    networks:
+      - searchnet
+
+  # ─────────────────────────────────────────
+  # 17. FESS             →  http://localhost:8083
+  #     All-in-one: web crawler + admin UI + search
+  #     Best self-hosted Google CSE replacement
+  # ─────────────────────────────────────────
+  fess:
+    image: ghcr.io/codelibs/fess:14.17.0
+    container_name: fess
+    restart: unless-stopped
+    ports:
+      - "8083:8080"
+    depends_on:
+      - fess-opensearch
+    environment:
+      - SEARCH_ENGINE_HTTP_URL=http://fess-opensearch:9200
+      - FESS_DICTIONARY_PATH=/usr/share/opensearch/config/dictionary/
+    volumes:
+      - fess-data:/opt/fess
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+    networks:
+      - searchnet
+
+  # ═══════════════════════════════════════════
+  #  CATEGORY 6 — DOCUMENT EXTRACTION
+  # ═══════════════════════════════════════════
+
+  # ─────────────────────────────────────────
+  # 18. APACHE TIKA      →  http://localhost:9998
+  #     Extract text+metadata from PDF/DOCX/PPT/images
+  # ─────────────────────────────────────────
+  tika:
+    image: apache/tika:latest
+    container_name: tika
+    restart: unless-stopped
+    ports:
+      - "9998:9998"
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+    networks:
+      - searchnet
+
+  # ═══════════════════════════════════════════
+  #  CATEGORY 7 — WEB CRAWLERS
+  #  Start with:  docker compose --profile crawlers up -d
+  # ═══════════════════════════════════════════
+
+  # ─────────────────────────────────────────
+  # 19. APACHE NUTCH     →  http://localhost:8084
+  #     Classic batch web crawler → feeds into Solr
+  #     REST wrapper for job management
+  # ─────────────────────────────────────────
+  nutch:
+    build: ./crawlers/nutch
+    container_name: nutch
+    restart: unless-stopped
+    profiles:
+      - crawlers
+      - full
+    ports:
+      - "8084:8084"
+    environment:
+      - SOLR_URL=http://solr:8983/solr/gettingstarted
+    volumes:
+      - nutch-data:/opt/nutch/data
+    depends_on:
+      - solr
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+    networks:
+      - searchnet
+
+  # ─────────────────────────────────────────
+  # 20. HERITRIX         →  https://localhost:8444
+  #     Internet Archive's archival web crawler
+  #     REST API + Web UI over HTTPS
+  # ─────────────────────────────────────────
+  heritrix:
+    build: ./crawlers/heritrix
+    container_name: heritrix
+    restart: unless-stopped
+    profiles:
+      - crawlers
+      - full
+    ports:
+      - "8444:8443"
+    environment:
+      - HERITRIX_USER=${HERITRIX_USER:-admin}
+      - HERITRIX_PASSWORD=${HERITRIX_PASSWORD:-admin123}
+    volumes:
+      - heritrix-data:/opt/heritrix/jobs
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+    networks:
+      - searchnet
+
+  # ═══════════════════════════════════════════
+  #  CATEGORY 8 — STORMCRAWLER INFRASTRUCTURE
+  #  Start with:  docker compose --profile storm up -d
+  #  Then deploy StormCrawler topology JARs onto the cluster
+  # ═══════════════════════════════════════════
+
+  # ─────────────────────────────────────────
+  # 21. ZOOKEEPER        →  localhost:2181
+  #     Coordination service for Apache Storm
+  # ─────────────────────────────────────────
+  zookeeper:
+    image: zookeeper:3.9
+    container_name: zookeeper
+    restart: unless-stopped
+    profiles:
+      - storm
+      - full
+    ports:
+      - "2181:2181"
+    volumes:
+      - zk-data:/data
+    networks:
+      - searchnet
+
+  # ─────────────────────────────────────────
+  # 22. STORM NIMBUS     →  localhost:6627
+  #     Apache Storm master node
+  # ─────────────────────────────────────────
+  storm-nimbus:
+    image: storm:2.6
+    container_name: storm-nimbus
+    restart: unless-stopped
+    profiles:
+      - storm
+      - full
+    command: storm nimbus
+    depends_on:
+      - zookeeper
+    environment:
+      - STORM_ZOOKEEPER_SERVERS=zookeeper
+    ports:
+      - "6627:6627"
+    volumes:
+      - storm-data:/data
+    networks:
+      - searchnet
+
+  # ─────────────────────────────────────────
+  # 23. STORM SUPERVISOR
+  #     Apache Storm worker node
+  # ─────────────────────────────────────────
+  storm-supervisor:
+    image: storm:2.6
+    container_name: storm-supervisor
+    restart: unless-stopped
+    profiles:
+      - storm
+      - full
+    command: storm supervisor
+    depends_on:
+      - storm-nimbus
+      - zookeeper
+    environment:
+      - STORM_ZOOKEEPER_SERVERS=zookeeper
+      - STORM_NIMBUS_SEEDS=storm-nimbus
+    networks:
+      - searchnet
+
+  # ─────────────────────────────────────────
+  # 24. STORM UI         →  http://localhost:8088
+  #     Apache Storm web dashboard
+  # ─────────────────────────────────────────
+  storm-ui:
+    image: storm:2.6
+    container_name: storm-ui
+    restart: unless-stopped
+    profiles:
+      - storm
+      - full
+    command: storm ui
+    depends_on:
+      - storm-nimbus
+    environment:
+      - STORM_ZOOKEEPER_SERVERS=zookeeper
+      - STORM_NIMBUS_SEEDS=storm-nimbus
+    ports:
+      - "8088:8080"
+    networks:
+      - searchnet
+
+networks:
+  searchnet:
+    driver: bridge
+
+# ═══════════════════════════════════════════
+#  NAMED VOLUMES
+# ═══════════════════════════════════════════
+volumes:
+  # Web meta-search
+  whoogle-data:
+  searxng-data:
+  # Full-text search engines
+  meili-data:
+  typesense-data:
+  quickwit-data:
+  sonic-data:
+  opensearch-data:
+  manticore-data:
+  solr-data:
+  zinc-data:
+  vespa-data:
+  # Vector / semantic search
+  qdrant-data:
+  weaviate-data:
+  # Specialized search
+  redis-data:
+  yacy-data:
+  # Google CSE alternatives
+  fess-opensearch-data:
+  fess-data:
+  # Web crawlers
+  nutch-data:
+  heritrix-data:
+  # Storm infrastructure
+  zk-data:
+  storm-data:

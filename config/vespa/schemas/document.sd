@@ -1,0 +1,38 @@
+schema document {
+
+    document document {
+
+        field title type string {
+            indexing: index | summary
+            index: enable-bm25
+        }
+
+        field url type string {
+            indexing: summary | attribute
+        }
+
+        field content type string {
+            indexing: index | summary
+            index: enable-bm25
+        }
+
+        field description type string {
+            indexing: index | summary
+            index: enable-bm25
+        }
+
+        field timestamp type long {
+            indexing: summary | attribute
+        }
+    }
+
+    fieldset default {
+        fields: title, content, description
+    }
+
+    rank-profile default inherits default {
+        first-phase {
+            expression: bm25(title)*2 + bm25(content) + bm25(description)
+        }
+    }
+}

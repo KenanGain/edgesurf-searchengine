@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<configuration>
+  <property>
+    <name>http.agent.name</name>
+    <value>UltimateSearchBot</value>
+    <description>HTTP agent string sent by Nutch crawler</description>
+  </property>
+  <property>
+    <name>http.robots.agents</name>
+    <value>UltimateSearchBot,*</value>
+  </property>
+  <property>
+    <name>plugin.includes</name>
+    <value>protocol-http|urlfilter-regex|parse-(html|tika)|index-(basic|anchor)|indexer-solr|scoring-opic|urlnormalizer-(pass|regex|basic)</value>
+  </property>
+  <property>
+    <name>db.ignore.external.links</name>
+    <value>false</value>
+  </property>
+  <property>
+    <name>fetcher.threads.fetch</name>
+    <value>10</value>
+  </property>
+  <property>
+    <name>fetcher.threads.per.queue</name>
+    <value>1</value>
+  </property>
+  <property>
+    <name>generate.max.count</name>
+    <value>1000</value>
+  </property>
+  <property>
+    <name>http.content.limit</name>
+    <value>1048576</value>
+    <description>Max content length in bytes (1MB)</description>
+  </property>
+</configuration>

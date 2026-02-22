@@ -1,0 +1,12 @@
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+httpx==0.28.1
+langchain-community==0.3.14
+duckduckgo-search>=7.0.0
+beautifulsoup4
+redis
+orjson
+fastembed
+sentence-transformers
+prometheus-client
+pydantic

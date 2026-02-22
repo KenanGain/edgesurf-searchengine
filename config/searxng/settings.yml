@@ -1,0 +1,90 @@
+use_default_settings: true
+
+server:
+  secret_key: "change-me-to-a-random-secret-key-abc123"
+  limiter: false
+  image_proxy: true
+  port: 8080
+  bind_address: "0.0.0.0"
+
+search:
+  safe_search: 0
+  autocomplete: "duckduckgo"
+  default_lang: "en"
+  formats:
+    - html
+    - json
+
+ui:
+  static_use_hash: true
+  default_theme: simple
+  results_on_new_tab: false
+
+general:
+  debug: false
+  instance_name: "Search Engine"
+
+engines:
+  - name: google
+    engine: google
+    shortcut: g
+    disabled: false
+  - name: duckduckgo
+    engine: duckduckgo
+    shortcut: ddg
+    disabled: false
+  - name: bing
+    engine: bing
+    shortcut: b
+    disabled: false
+  - name: brave
+    engine: brave
+    shortcut: br
+    disabled: false
+  - name: wikipedia
+    engine: wikipedia
+    shortcut: w
+    disabled: false
+  - name: github
+    engine: github
+    shortcut: gh
+    disabled: false
+  - name: stackoverflow
+    engine: stackoverflow
+    shortcut: so
+    disabled: false
+  - name: arxiv
+    engine: arxiv
+    shortcut: ar
+    disabled: false
+  - name: google scholar
+    engine: google_scholar
+    shortcut: gs
+    disabled: false
+  - name: google news
+    engine: google_news
+    shortcut: gn
+    disabled: false
+  - name: google images
+    engine: google_images
+    shortcut: gi
+    disabled: false
+  - name: google videos
+    engine: google_videos
+    shortcut: gv
+    disabled: false
+  - name: reddit
+    engine: reddit
+    shortcut: r
+    disabled: false
+  - name: wikidata
+    engine: wikidata
+    shortcut: wd
+    disabled: false
+
+outgoing:
+  request_timeout: 6.0
+  max_request_timeout: 15.0
+  useragent_suffix: ""
+  pool_connections: 100
+  pool_maxsize: 20
