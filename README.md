@@ -135,25 +135,19 @@ To ensure our abstract vision was translated flawlessly into a tangible reality,
 
 ---
 
-## 📢 Social Media Announcement Draft
-
-We have prepared a captivating, ready-to-use snippet for your LinkedIn or X (formerly Twitter) feed. Feel free to copy and share it with your network!
+## � Our Vision
 
 <div align="center">
   <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExZzdncWF6cWloODIwcGU1bXEzdzZ2MXd1YWIxYW0xcGh2aGY5YXl2YyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/WoLhFt0i6AtUFasPyC/giphy.gif" alt="Hacker typing" width="400" style="border-radius: 8px; margin: 20px 0;"/>
 </div>
 
-> Are you tired of constantly compromising your digital privacy for relevant web results? 🛑 It’s time for a definitive paradigm shift!
->
-> I am absolutely thrilled to unveil EdgeSurf—the next generation of search. 🚀 To begin with, it seamlessly bridges the gap between speed and comprehensiveness by aggregating results from over 21 diverse engines. Furthermore, it boasts a state-of-the-art infrastructure that respects your absolute privacy. No tracking. No insidious data farming. Just pure, unadulterated information.
->
-> In light of recent worldwide data vulnerabilities, self-hosting a meticulously secure search environment is no longer just an alternative; it is imperative. We truly left no stone unturned while designing this platform. From an immersive 16:9 UI to transparent query diagnostics and dedicated tabs for files and images, it undeniably acts as a breath of fresh air in today's rather cluttered ecosystem.
->
-> Whether you are a developer seeking transparency or an everyday user craving speed, you can hit the ground running with EdgeSurf and experience the web exactly as it was meant to be.
->
-> Check out the comprehensive Figma drafts, our short demo video, and our GitHub repository to see the magic unfold! I would be delighted to hear your thoughts in the comments below. 👇
->
-> #EdgeSurf #WebDevelopment #PrivacyFirst #Nextjs #OpenSource #Innovation #TechCommunity #SearchEngine
+Are you tired of constantly compromising your digital privacy for relevant web results? 🛑 It’s time for a definitive paradigm shift!
+
+We are absolutely thrilled to present **EdgeSurf**—the next generation of search. 🚀 To begin with, it seamlessly bridges the gap between speed and comprehensiveness by aggregating results from over 21 diverse engines. Furthermore, it boasts a state-of-the-art infrastructure that respects your absolute privacy. No tracking. No insidious data farming. Just pure, unadulterated information.
+
+In light of recent worldwide data vulnerabilities, self-hosting a meticulously secure search environment is no longer just an alternative; it is imperative. We truly left no stone unturned while designing this platform. From an immersive 16:9 UI to transparent query diagnostics and dedicated tabs for files and images, it undeniably acts as a breath of fresh air in today's rather cluttered ecosystem.
+
+Whether you are a developer seeking transparency or an everyday user craving speed, you can hit the ground running with EdgeSurf and experience the web exactly as it was meant to be.
 
 ---
 
