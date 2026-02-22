@@ -121,7 +121,7 @@ Leave no stone unturned when hunting for academic PDFs, presentation slides, or 
 
 To ensure our abstract vision was translated flawlessly into a tangible reality, we leveraged Figma to establish our overarching design paradigm.
 
-_(GitHub does not support direct iframe embeds. Click the badge below to load the interactive designs!)_
+
 
 <div align="center">
   <a href="https://www.figma.com/design/Qn0uAOW9L8TB9LPJQQgnPk/Edgesurf-designs?node-id=0-1&t=ZVqYpHrcVhC6Uvta-1">
