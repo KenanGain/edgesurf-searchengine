@@ -179,13 +179,16 @@ In light of recent worldwide data vulnerabilities, self-hosting a meticulously s
 Whether you are a developer seeking transparency or an everyday user craving speed, you can hit the ground running with EdgeSurf and experience the web exactly as it was meant to be.
 
 ## ⏳ Next Project 
+  
+###Coming Soon...
 
 <div align="center">
-  ###Coming Soon...
+
   <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExaXI4dTgwbHQzcXRnMzlhMmZ6M2NvdTEzdTk1dWNrMGVibTlsdWp2ayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/um2kBnfo55iW4ZH1Fa/giphy.gif"
              width="120" alt="Coming Soon – funny tech GIF"/>
-  <br><br>
-  <img width="25%" src="https://github.com/KenanGain/KenanGain/blob/main/Gif/iron-man-tony-stark.gif" alt="Work in progress"/>
+  <br>
+  
+ 
 </div>
 
 
