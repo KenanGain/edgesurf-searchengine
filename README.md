@@ -178,6 +178,21 @@ In light of recent worldwide data vulnerabilities, self-hosting a meticulously s
 
 Whether you are a developer seeking transparency or an everyday user craving speed, you can hit the ground running with EdgeSurf and experience the web exactly as it was meant to be.
 
+## ⏳ Coming Soon...
+
+<div align="center">
+  <img src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExaXI4dTgwbHQzcXRnMzlhMmZ6M2NvdTEzdTk1dWNrMGVibTlsdWp2ayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/um2kBnfo55iW4ZH1Fa/giphy.gif"
+             width="120" alt="Coming Soon – funny tech GIF"/>
+  <br><br>
+  <img width="25%" src="https://github.com/KenanGain/KenanGain/blob/main/Gif/iron-man-tony-stark.gif" alt="Work in progress"/>
+</div>
+
+### 🚀 Super GPT: The AI Overachiever You Didn’t Know You Needed
+
+<p><strong>Super GPT</strong> is here to unite the world’s top LLMs, because why settle for one when you can have them all? Currently in development, this powerhouse is over-prepared to handle web searches, document interrogation, and even video analysis. If you need something found, explained, or overanalyzed, Super GPT has you covered.</p>
+
+<p>Mixing small and large language models like a tech smoothie, Super GPT doesn’t just answer questions; it contemplates existence. With a sleek UI that practically <em>whispers</em> “futuristic,” Super GPT is setting a gold standard in AI that we’re almost certain no one actually asked for—but everyone will soon need.</p>
+
 ---
 
 ## 🤝 Let's Connect!
