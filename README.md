@@ -10,7 +10,7 @@
     <a href="https://github.com/KenanGain/edgesurf-searchengine/pulls"><img src="https://img.shields.io/github/issues-pr/KenanGain/edgesurf-searchengine?style=for-the-badge&color=8B5CF6" alt="Pull Requests Badge"/></a>
     <a href="https://github.com/KenanGain"><img src="https://img.shields.io/github/followers/KenanGain?style=for-the-badge&color=8B5CF6" alt="Followers Badge"/></a>
     <br>
-    <img src="https://komarev.com/ghpvc/?username=KenanGain-EdgeSurf&style=for-the-badge&color=8B5CF6" alt="Views Badge"/>
+ 
   </p>
 
   <p>Navigating the vast expanse of the internet can often feel like searching for a needle in a haystack. <b>EdgeSurf</b> emerges as a quintessential game-changer in this domain. Meticulously engineered to prioritize privacy and speed, this state-of-the-art search platform seamlessly aggregates results across 21+ distinct engines, ensuring that you leave no stone unturned.</p>
