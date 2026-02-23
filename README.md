@@ -180,7 +180,7 @@ Whether you are a developer seeking transparency or an everyday user craving spe
 
 ## ⏳ Next Project 
   
-###Coming Soon...
+Coming Soon...
 
 <div align="center">
 
